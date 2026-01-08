@@ -1,4 +1,7 @@
 # Hosty
+## 📐 Documentation
+
+- [System Design Document](docs/design.md)
 
 Hosty is a multi-tenant static hosting platform written in C.
 
