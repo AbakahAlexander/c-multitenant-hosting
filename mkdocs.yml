@@ -1,0 +1,10 @@
+site_name: Hosty
+repo_url: https://github.com/<youruser>/<yourrepo>
+theme:
+  name: material
+nav:
+  - Home: index.md
+  - Design: design.md
+  - Developer Guide:
+      - Build & Run: dev/build.md
+      - Deployment: dev/deploy.md
