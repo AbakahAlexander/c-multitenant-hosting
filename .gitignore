@@ -1,0 +1,21 @@
+# Build artifacts
+*.o
+*.out
+*.exe
+*.a
+
+# Binaries
+hosty
+httpd
+server
+
+# Logs
+*.log
+
+# Editor / OS junk
+.vscode/
+.idea/
+.DS_Store
+
+# Sanitizer output
+*.asan
