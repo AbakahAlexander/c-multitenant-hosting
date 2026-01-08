@@ -1,0 +1,2015 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="..">
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>Design - Hosty</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#hosty-detailed-design-document" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Hosty" class="md-header__button md-logo" aria-label="Hosty" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Hosty
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Design
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/<youruser>/<yourrepo>" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Hosty" class="md-nav__button md-logo" aria-label="Hosty" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Hosty
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/<youruser>/<yourrepo>" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Design
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Design
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#table-of-contents" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Table of Contents
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Overview
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#high-level-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        High-Level Architecture
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-goals-and-non-goals" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Goals and Non-Goals
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Goals and Non-Goals">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-goals" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 Goals
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-non-goals" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 Non-Goals
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-high-level-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. High-Level Architecture
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. High-Level Architecture">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-system-stack" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 System Stack
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-deployment-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 Deployment Model
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-http-server-design" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. HTTP Server Design
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. HTTP Server Design">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-networking-layer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 Networking Layer
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-connection-handling" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 Connection Handling
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-thread-pool" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3 Thread Pool
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-http-parsing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. HTTP Parsing
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. HTTP Parsing">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-supported-methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 Supported Methods
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-parsing-rules" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2 Parsing Rules
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53-header-handling" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3 Header Handling
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-virtual-hosting-multi-tenancy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Virtual Hosting (Multi-Tenancy)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Virtual Hosting (Multi-Tenancy)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61-tenant-resolution" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1 Tenant Resolution
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62-validation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2 Validation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#63-directory-mapping" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.3 Directory Mapping
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-static-file-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Static File Server
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Static File Server">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71-file-resolution" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1 File Resolution
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72-security" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.2 Security
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#73-response" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.3 Response
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-api-layer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. API Layer
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. API Layer">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#81-routing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.1 Routing
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#82-endpoints" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.2 Endpoints
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#83-key-rules" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.3 Key Rules
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-authentication-authorization" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Authentication &amp; Authorization
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9. Authentication &amp; Authorization">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#91-api-keys" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.1 API Keys
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#92-authorization" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.2 Authorization
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-rate-limiting-quotas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Rate Limiting &amp; Quotas
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10. Rate Limiting &amp; Quotas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#101-rate-limiting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.1 Rate Limiting
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#102-storage-quotas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.2 Storage Quotas
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-custom-database-design" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. Custom Database Design
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="11. Custom Database Design">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#111-overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.1 Overview
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#112-record-format" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.2 Record Format
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#113-operations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.3 Operations
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#114-recovery" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.4 Recovery
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#115-concurrency" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.5 Concurrency
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-logging-metrics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. Logging &amp; Metrics
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="12. Logging &amp; Metrics">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#121-access-logs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.1 Access Logs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#122-metrics-endpoint" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.2 Metrics Endpoint
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13-error-handling-strategy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. Error Handling Strategy
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14-security-considerations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14. Security Considerations
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#15-future-enhancements-optional" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15. Future Enhancements (Optional)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#16-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16. Summary
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Developer Guide
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Developer Guide
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../dev/build.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Build & Run
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../dev/deploy.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Deployment
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#table-of-contents" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Table of Contents
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Overview
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#high-level-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        High-Level Architecture
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-goals-and-non-goals" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Goals and Non-Goals
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Goals and Non-Goals">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-goals" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 Goals
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-non-goals" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 Non-Goals
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-high-level-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. High-Level Architecture
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. High-Level Architecture">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-system-stack" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 System Stack
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-deployment-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 Deployment Model
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-http-server-design" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. HTTP Server Design
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. HTTP Server Design">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-networking-layer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 Networking Layer
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-connection-handling" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 Connection Handling
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-thread-pool" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3 Thread Pool
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-http-parsing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. HTTP Parsing
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. HTTP Parsing">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-supported-methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 Supported Methods
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-parsing-rules" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2 Parsing Rules
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53-header-handling" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3 Header Handling
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-virtual-hosting-multi-tenancy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Virtual Hosting (Multi-Tenancy)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Virtual Hosting (Multi-Tenancy)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61-tenant-resolution" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1 Tenant Resolution
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62-validation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2 Validation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#63-directory-mapping" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.3 Directory Mapping
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-static-file-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Static File Server
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Static File Server">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71-file-resolution" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1 File Resolution
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72-security" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.2 Security
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#73-response" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.3 Response
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-api-layer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. API Layer
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. API Layer">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#81-routing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.1 Routing
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#82-endpoints" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.2 Endpoints
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#83-key-rules" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.3 Key Rules
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-authentication-authorization" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Authentication &amp; Authorization
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9. Authentication &amp; Authorization">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#91-api-keys" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.1 API Keys
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#92-authorization" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.2 Authorization
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-rate-limiting-quotas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Rate Limiting &amp; Quotas
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10. Rate Limiting &amp; Quotas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#101-rate-limiting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.1 Rate Limiting
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#102-storage-quotas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.2 Storage Quotas
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-custom-database-design" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. Custom Database Design
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="11. Custom Database Design">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#111-overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.1 Overview
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#112-record-format" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.2 Record Format
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#113-operations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.3 Operations
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#114-recovery" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.4 Recovery
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#115-concurrency" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.5 Concurrency
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-logging-metrics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. Logging &amp; Metrics
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="12. Logging &amp; Metrics">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#121-access-logs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.1 Access Logs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#122-metrics-endpoint" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.2 Metrics Endpoint
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13-error-handling-strategy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. Error Handling Strategy
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14-security-considerations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14. Security Considerations
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#15-future-enhancements-optional" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15. Future Enhancements (Optional)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#16-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16. Summary
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="hosty-detailed-design-document">Hosty — Detailed Design Document</h1>
+<h2 id="table-of-contents">Table of Contents</h2>
+<ul>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#goals-and-non-goals">Goals and Non-Goals</a></li>
+<li><a href="#high-level-architecture">Architecture</a></li>
+<li><a href="#http-server-design">HTTP Server Design</a></li>
+<li><a href="#custom-database-design">Database Design</a></li>
+<li><a href="#security-considerations">Security Considerations</a></li>
+</ul>
+<h2 id="1-overview">1. Overview</h2>
+<p><strong>Hosty</strong> is a multi-tenant static website hosting platform written entirely in <strong>C</strong>, designed to allow multiple users to host static websites (HTML/CSS/JS) for free while also providing a lightweight backend <strong>API</strong> backed by a <strong>custom-built persistent database</strong>.</p>
+<p>The project is intentionally low-level and infrastructure-focused. Instead of building an application (like an e-commerce site), Hosty builds the <strong>underlying systems</strong>: an HTTP server, a multi-tenant routing layer, a secure static file server, an authenticated API, and a durable storage engine.</p>
+<p>This document specifies the full system architecture, components, data flow, storage format, concurrency model, and security considerations.</p>
+<hr />
+<h2 id="high-level-architecture">High-Level Architecture</h2>
+<p><img alt="Hosty Architecture" src="../images/architecture.png" /></p>
+<h2 id="2-goals-and-non-goals">2. Goals and Non-Goals</h2>
+<h3 id="21-goals">2.1 Goals</h3>
+<ul>
+<li>Provide <strong>static website hosting</strong> for multiple tenants</li>
+<li>Support <strong>virtual hosting</strong> via subdomains (Host header)</li>
+<li>Expose a <strong>simple HTTP API</strong> usable by static frontend JavaScript</li>
+<li>Implement a <strong>custom persistent database</strong> (no external DB)</li>
+<li>Ensure <strong>tenant isolation</strong> and basic abuse protection</li>
+<li>Run as a <strong>single deployable service</strong> on a Linux VM</li>
+</ul>
+<h3 id="22-non-goals">2.2 Non-Goals</h3>
+<ul>
+<li>No server-side scripting (PHP, Python, Node)</li>
+<li>No SQL, joins, or complex queries</li>
+<li>No arbitrary user code execution</li>
+<li>No payment, billing, or user UI dashboards</li>
+<li>No high-availability or multi-node replication</li>
+</ul>
+<hr />
+<h2 id="3-high-level-architecture">3. High-Level Architecture</h2>
+<h3 id="31-system-stack">3.1 System Stack</h3>
+<pre><code>Browser (HTML/CSS/JS)
+        ↓ HTTPS
+Nginx (TLS termination, reverse proxy)
+        ↓ HTTP (localhost)
+Custom C HTTP Server
+  ├─ Virtual Host Resolver
+  ├─ Request Router
+  ├─ Static File Server
+  ├─ API Layer
+  ├─ Auth / Quotas / Rate Limiter
+  └─ Thread Pool
+        ↓
+Custom Key-Value Database (WAL + In-memory Index)
+</code></pre>
+<h3 id="32-deployment-model">3.2 Deployment Model</h3>
+<ul>
+<li>Single Linux VM (Oracle/AWS/GCP free tier)</li>
+<li>Nginx listens on ports 80/443</li>
+<li>Hosty listens on 127.0.0.1:8080</li>
+<li>Hosty runs as non-root via systemd</li>
+</ul>
+<hr />
+<h2 id="4-http-server-design">4. HTTP Server Design</h2>
+<h3 id="41-networking-layer">4.1 Networking Layer</h3>
+<ul>
+<li>Uses POSIX sockets</li>
+<li>TCP, IPv4</li>
+<li><code>SO_REUSEADDR</code> enabled</li>
+<li>Configurable listen port</li>
+<li>Timeouts for read/write operations</li>
+</ul>
+<h3 id="42-connection-handling">4.2 Connection Handling</h3>
+<ul>
+<li>One accept loop</li>
+<li>Accepted sockets are placed into a <strong>work queue</strong></li>
+<li>Worker threads pull sockets and fully handle requests</li>
+</ul>
+<h3 id="43-thread-pool">4.3 Thread Pool</h3>
+<ul>
+<li>Fixed-size pool (e.g. 4–8 threads)</li>
+<li>Shared queue protected by mutex + condition variable</li>
+<li>Prevents unbounded thread creation</li>
+</ul>
+<hr />
+<h2 id="5-http-parsing">5. HTTP Parsing</h2>
+<h3 id="51-supported-methods">5.1 Supported Methods</h3>
+<ul>
+<li>GET</li>
+<li>PUT</li>
+<li>DELETE</li>
+</ul>
+<h3 id="52-parsing-rules">5.2 Parsing Rules</h3>
+<ul>
+<li>Read until <code>\r\n\r\n</code> (end of headers)</li>
+<li>Enforce maximum header size (e.g. 16 KB)</li>
+<li>
+<p>Parse request line:</p>
+</li>
+<li>
+<p>method</p>
+</li>
+<li>path</li>
+<li>HTTP version</li>
+</ul>
+<h3 id="53-header-handling">5.3 Header Handling</h3>
+<ul>
+<li>Required: <code>Host</code></li>
+<li>Optional: <code>Content-Length</code>, <code>Connection</code>, <code>X-API-Key</code></li>
+<li>Unknown headers ignored</li>
+</ul>
+<p>Malformed requests return <strong>400 Bad Request</strong>.</p>
+<hr />
+<h2 id="6-virtual-hosting-multi-tenancy">6. Virtual Hosting (Multi-Tenancy)</h2>
+<h3 id="61-tenant-resolution">6.1 Tenant Resolution</h3>
+<ul>
+<li>Extract hostname from <code>Host</code> header</li>
+<li>Strip port if present</li>
+<li>Match <code>*.yourdomain.com</code></li>
+<li>Leftmost label = tenant name</li>
+</ul>
+<p>Example:</p>
+<pre><code>Host: alice.yourdomain.com → tenant = alice
+</code></pre>
+<h3 id="62-validation">6.2 Validation</h3>
+<ul>
+<li>Allowed tenant characters: <code>[a-z0-9-]{1,32}</code></li>
+<li>Invalid tenant → 400</li>
+</ul>
+<h3 id="63-directory-mapping">6.3 Directory Mapping</h3>
+<pre><code>/srv/sites/&lt;tenant&gt;/public/
+</code></pre>
+<hr />
+<h2 id="7-static-file-server">7. Static File Server</h2>
+<h3 id="71-file-resolution">7.1 File Resolution</h3>
+<ul>
+<li><code>/</code> → <code>/index.html</code></li>
+<li>Paths resolved relative to tenant root</li>
+</ul>
+<h3 id="72-security">7.2 Security</h3>
+<ul>
+<li>Reject <code>..</code> after URL decoding</li>
+<li>Never follow symlinks</li>
+<li>Enforce chroot-like behavior by path checks</li>
+</ul>
+<h3 id="73-response">7.3 Response</h3>
+<ul>
+<li>Proper <code>Content-Type</code></li>
+<li>Correct <code>Content-Length</code></li>
+<li>Status codes: 200, 403, 404</li>
+</ul>
+<hr />
+<h2 id="8-api-layer">8. API Layer</h2>
+<h3 id="81-routing">8.1 Routing</h3>
+<ul>
+<li>Paths beginning with <code>/api/</code> routed to API handler</li>
+</ul>
+<h3 id="82-endpoints">8.2 Endpoints</h3>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Path</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>PUT</td>
+<td>/api/data/<key></td>
+<td>Set value</td>
+</tr>
+<tr>
+<td>GET</td>
+<td>/api/data/<key></td>
+<td>Get value</td>
+</tr>
+<tr>
+<td>DELETE</td>
+<td>/api/data/<key></td>
+<td>Delete value</td>
+</tr>
+</tbody>
+</table>
+<h3 id="83-key-rules">8.3 Key Rules</h3>
+<ul>
+<li>Allowed key chars: <code>[A-Za-z0-9._-]{1,64}</code></li>
+<li>Max value size (e.g. 64 KB)</li>
+</ul>
+<hr />
+<h2 id="9-authentication-authorization">9. Authentication &amp; Authorization</h2>
+<h3 id="91-api-keys">9.1 API Keys</h3>
+<ul>
+<li>Each tenant has an API key</li>
+<li>Passed via <code>X-API-Key</code> header</li>
+<li>Stored hashed (SHA-256)</li>
+</ul>
+<h3 id="92-authorization">9.2 Authorization</h3>
+<ul>
+<li>Tenant determined by Host header</li>
+<li>API key must match tenant</li>
+<li>No cross-tenant access possible</li>
+</ul>
+<hr />
+<h2 id="10-rate-limiting-quotas">10. Rate Limiting &amp; Quotas</h2>
+<h3 id="101-rate-limiting">10.1 Rate Limiting</h3>
+<ul>
+<li>Token bucket per tenant</li>
+<li>Limits API request rate</li>
+</ul>
+<h3 id="102-storage-quotas">10.2 Storage Quotas</h3>
+<ul>
+<li>Max bytes per tenant</li>
+<li>Enforced during writes</li>
+</ul>
+<hr />
+<h2 id="11-custom-database-design">11. Custom Database Design</h2>
+<h3 id="111-overview">11.1 Overview</h3>
+<ul>
+<li>Single-node embedded KV store</li>
+<li>Append-only write-ahead log (WAL)</li>
+<li>In-memory hash table index</li>
+</ul>
+<h3 id="112-record-format">11.2 Record Format</h3>
+<p>Each record contains:</p>
+<ul>
+<li>magic number</li>
+<li>version</li>
+<li>flags (SET / DEL)</li>
+<li>tenant length</li>
+<li>key length</li>
+<li>value length</li>
+<li>tenant bytes</li>
+<li>key bytes</li>
+<li>value bytes</li>
+<li>CRC32 checksum</li>
+</ul>
+<h3 id="113-operations">11.3 Operations</h3>
+<ul>
+<li>SET: append record + update index</li>
+<li>GET: lookup index + read WAL offset</li>
+<li>DEL: append tombstone</li>
+</ul>
+<h3 id="114-recovery">11.4 Recovery</h3>
+<ul>
+<li>On startup, replay WAL sequentially</li>
+<li>Verify CRC</li>
+<li>Rebuild index</li>
+</ul>
+<h3 id="115-concurrency">11.5 Concurrency</h3>
+<ul>
+<li>Global read-write lock</li>
+<li>GET = read lock</li>
+<li>PUT/DEL = write lock</li>
+</ul>
+<hr />
+<h2 id="12-logging-metrics">12. Logging &amp; Metrics</h2>
+<h3 id="121-access-logs">12.1 Access Logs</h3>
+<ul>
+<li>Timestamp</li>
+<li>Tenant</li>
+<li>Method</li>
+<li>Path</li>
+<li>Status</li>
+<li>Latency</li>
+</ul>
+<h3 id="122-metrics-endpoint">12.2 Metrics Endpoint</h3>
+<ul>
+<li><code>/metrics</code></li>
+<li>Requests total</li>
+<li>API requests</li>
+<li>Error counts</li>
+<li>Average latency</li>
+</ul>
+<hr />
+<h2 id="13-error-handling-strategy">13. Error Handling Strategy</h2>
+<ul>
+<li>Fail fast on malformed input</li>
+<li>Never crash on user input</li>
+<li>Graceful shutdown on SIGINT</li>
+<li>Always fsync WAL before ACK</li>
+</ul>
+<hr />
+<h2 id="14-security-considerations">14. Security Considerations</h2>
+<ul>
+<li>Run as non-root</li>
+<li>Input validation everywhere</li>
+<li>No dynamic code execution</li>
+<li>No file uploads via HTTP</li>
+<li>Nginx handles TLS</li>
+</ul>
+<hr />
+<h2 id="15-future-enhancements-optional">15. Future Enhancements (Optional)</h2>
+<ul>
+<li>WAL compaction</li>
+<li>Keep-alive connections</li>
+<li>HTTP range requests</li>
+<li>Directory auto-index</li>
+<li>Git-based deployments</li>
+</ul>
+<hr />
+<h2 id="16-summary">16. Summary</h2>
+<p>Hosty demonstrates low-level systems engineering by building a complete hosting stack from scratch in C: networking, HTTP, multi-tenancy, security, persistence, and deployment. It is intentionally scoped to be small, safe, and educational while remaining realistic and production-inspired.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": [], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
