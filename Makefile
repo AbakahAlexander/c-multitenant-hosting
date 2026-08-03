@@ -1,14 +1,18 @@
-CC = gcc
-CFLAGS = -Wall -Wextra -Wpedantic -Werror -O2 -Iinclude
-LDFLAGS = -pthread
+CC ?= gcc
 
-SRC = src/main.c src/db.c
-OUT = hosty-db
+CFLAGS = -Wall -Wextra -Werror -Wpedantic -I./db
 
-all: $(OUT)
+TEST_TARGET = tests/test_record
 
-$(OUT): $(SRC)
-	$(CC) $(CFLAGS) -o $(OUT) $(SRC) $(LDFLAGS)
+.PHONY: all test clean
 
-clean:
-	rm -f $(OUT) *.o data.wal
+all: test
+
+test: $(TEST_TARGET)
+	./$(TEST_TARGET)
+
+$(TEST_TARGET): tests/test_record.c db/record.c db/record.h
+	$(CC) $(CFLAGS) tests/test_record.c db/record.c -o $(TEST_TARGET)
+
+clean: 
+	rm -f $(TEST_TARGET) *.o
